@@ -1,0 +1,19 @@
+[
+  {
+    "name": "David Geschwendt",
+    "logo": "imcs-logo.png",
+    "email": "dgeschwendt@imcs.solutions",
+    "phone": {
+      "display": "1.616.886.9044",
+      "mailto": "16168869044"
+    }
+  }, {
+    "name": "David Geschwendt",
+    "logo": "peerless-logo.png",
+    "email": "dgeschwendt@peerless.solutions",
+    "phone": {
+      "display": "1.616.886.9044",
+      "mailto": "16168869044"
+    }
+  }
+]
