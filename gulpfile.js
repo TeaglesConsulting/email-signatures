@@ -8,22 +8,16 @@ var gulp = require('gulp')
 var plug = require('gulp-load-plugins')({ lazy: true })
 var inky = require('inky')
 
-var signatures = require('./src/signatures.json')
 var builders = []
-for (var i = 0; i < signatures.length; i++) {
-  var signature = signatures[i]
-  builders.push(function compileTemplate() {
+var signatures = require('./src/signatures.json')
+signatures.forEach(function(signature) {
+  builders.push(function() {
     return gulp
       .src(['tmp/build/**/*.htm'])
       .pipe(plug.compileHandlebars(signature))
       .pipe(gulp.dest('dist/' + signature.email))
   })
-}
-
-gulp.task('build', gulp.series(build, gulp.parallel.apply(this, builders)))
-gulp.task('serve', gulp.series(build, gulp.parallel.apply(this, builders), gulp.parallel(startLocalhost, watch)))
-
-gulp.task('deploy', gulp.series(build, gulp.parallel.apply(this, builders)), deploy)
+})
 
 const inkyOpts = {}
 function build() {
@@ -47,7 +41,13 @@ function startLocalhost() {
   })
 }
 
-function deploy() {
-  return gulp.src('./dist/**/*')
-    .pipe(plug.ghPages());
+function deploySignatures() {
+  console.log('starting deploy')
+  return gulp.src('dist/**/*')
+    .pipe(plug.debug())
+    .pipe(plug.ghPages())
 }
+
+gulp.task('build',  gulp.series(build, gulp.parallel.apply(gulp, builders)))
+gulp.task('serve',  gulp.series(build, gulp.parallel.apply(gulp, builders), gulp.parallel(startLocalhost, watch)))
+gulp.task('deploy', gulp.series(build, gulp.parallel.apply(gulp, builders), deploySignatures))

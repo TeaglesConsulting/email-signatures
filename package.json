@@ -4,6 +4,7 @@
   "description": "IMCS email signatures.",
   "main": "index.js",
   "scripts": {
+    "build": "npm run gulp -- build",
     "deploy": "npm run gulp -- deploy",
     "gulp": "node node_modules/.bin/gulp",
     "start": "npm run gulp -- serve",
@@ -27,10 +28,12 @@
   "devDependencies": {
     "browser-sync": "2.11.1",
     "gulp": "gulpjs/gulp#56e3e56",
-    "gulp-compile-handlebars": "^0.6.1",
+    "gulp-compile-handlebars": "0.6.1",
+    "gulp-debug": "2.1.2",
     "gulp-deploy": "0.0.2",
-    "gulp-inline-image-html": "^0.2.1",
-    "gulp-load-plugins": "^1.2.0",
+    "gulp-gh-pages": "0.5.4",
+    "gulp-inline-image-html": "0.2.1",
+    "gulp-load-plugins": "1.2.0",
     "inky": "1.0.0"
   }
 }
